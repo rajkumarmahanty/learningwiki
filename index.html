@@ -1,5 +1,110 @@
-<h1>My Learning Wiki</h1>
-<ul>
-    <li><a href="branching-strategies.html">Git Branching Strategies</a></li>
-    <li><a href="ci-cd-automation.html">CI/CD Best Practices</a> (Coming Soon)</li>
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Learning Wiki</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            background-color: var(--bg-color);
+        }
+
+        /* Sidebar Styling */
+        nav {
+            width: 250px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        nav h2 {
+            font-size: 1.2rem;
+            border-bottom: 1px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 15px 0;
+        }
+
+        nav ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Main Content Area */
+        main {
+            flex-grow: 1;
+            padding: 40px;
+            overflow-y: auto;
+            background: white;
+        }
+
+        header {
+            border-bottom: 2px solid var(--bg-color);
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: var(--bg-color);
+            padding: 20px;
+            border-left: 5px solid var(--accent-color);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <h2>📚 My Wiki</h2>
+        <ul>
+            <li><a href="index.html">🏠 Home</a></li>
+            <li><a href="branching-strategies.html">🌿 Branching Strategies</a></li>
+            <li><a href="#">☸️ Kubernetes (Soon)</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <header>
+            <h1>Welcome to my Knowledge Base</h1>
+            <p>A collection of technical notes, cheat sheets, and learning journey logs.</p>
+        </header>
+
+        <section class="card">
+            <h3>Latest Updates</h3>
+            <ul>
+                <li>Initial setup of GitHub Pages wiki.</li>
+                <li>Added documentation for Git Branching Strategies.</li>
+            </ul>
+        </section>
+
+        <p>Select a topic from the sidebar to get started.</p>
+    </main>
+
+</body>
+</html>
