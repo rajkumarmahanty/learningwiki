@@ -2,23 +2,197 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Branching Strategies Wiki</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git Branching Strategies - Wiki</title>
     <style>
-        body { font-family: sans-serif; line-height: 1.6; padding: 20px; max-width: 800px; margin: auto; }
-        h1 { color: #2c3e50; border-bottom: 2px solid #eee; }
-        .strategy-card { background: #f9f9f9; padding: 15px; margin-bottom: 10px; border-radius: 5px; }
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        /* Sidebar Styling */
+        nav {
+            width: 250px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+
+        nav h2 {
+            font-size: 1.2rem;
+            border-bottom: 1px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 15px 0;
+        }
+
+        nav ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Main Content Area */
+        main {
+            flex-grow: 1;
+            padding: 40px;
+            overflow-y: auto;
+            background: white;
+        }
+
+        header {
+            border-bottom: 2px solid var(--bg-color);
+            margin-bottom: 30px;
+        }
+
+        h1 { color: var(--primary-color); }
+        h2 { color: var(--secondary-color); margin-top: 30px; border-bottom: 1px solid var(--border-color); padding-bottom: 5px;}
+
+        .strategy-box {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid var(--accent-color);
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th { background-color: var(--bg-color); }
+
+        .tag {
+            background: #e1f5fe;
+            color: #0288d1;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-    <h1>Git Branching Strategies</h1>
-    <div class="strategy-card">
-        <h3>GitFlow</h3>
-        <p>Best for scheduled releases. Uses Main, Develop, and Feature branches.</p>
-    </div>
-    <div class="strategy-card">
-        <h3>Trunk-Based</h3>
-        <p>Best for CI/CD. Short-lived branches merging directly to Main.</p>
-    </div>
-    <a href="index.html">Back to Home</a>
+
+    <nav>
+        <h2>📚 My Wiki</h2>
+        <ul>
+            <li><a href="index.html">🏠 Home</a></li>
+            <li><a href="branching-strategies.html">🌿 Branching Strategies</a></li>
+            <li><a href="#">☸️ Kubernetes (Soon)</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <header>
+            <h1>Git Branching Strategies</h1>
+            <p>Guidelines for code management and traffic control in development.</p>
+        </header>
+
+        <section>
+            <h2>1. GitFlow <span class="tag">Standard</span></h2>
+            <p>Best for projects with scheduled release cycles.</p>
+            <div class="strategy-box">
+                <ul>
+                    <li><strong>Main:</strong> Production-ready code only.</li>
+                    <li><strong>Develop:</strong> Integration branch for features.</li>
+                    <li><strong>Feature:</strong> Short-lived branches for specific tasks.</li>
+                    <li><strong>Release:</strong> Final polish before production.</li>
+                    <li><strong>Hotfix:</strong> Emergency fixes for production bugs.</li>
+                </ul>
+            </div>
+            
+
+            <h2>2. GitHub Flow <span class="tag">CI/CD</span></h2>
+            <p>Best for high-frequency deployment and small, agile teams.</p>
+            <div class="strategy-box">
+                <ul>
+                    <li><strong>Main:</strong> Always deployable.</li>
+                    <li><strong>Feature:</strong> Descriptive branches created from Main.</li>
+                    <li><strong>Pull Requests:</strong> Used for review and testing.</li>
+                    <li><strong>Merge:</strong> Immediate deployment after approval.</li>
+                </ul>
+            </div>
+
+            <h2>3. Trunk-Based Development <span class="tag">High Velocity</span></h2>
+            <p>Favored by high-performing DevOps teams to minimize merge debt.</p>
+            <div class="strategy-box">
+                <ul>
+                    <li><strong>Single Trunk:</strong> Most work happens directly on Main.</li>
+                    <li><strong>Short-lived:</strong> Branches last hours, not days.</li>
+                    <li><strong>Feature Flags:</strong> Used to toggle unfinished code in production.</li>
+                </ul>
+            </div>
+            
+
+            <h2>Summary Comparison</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Strategy</th>
+                        <th>Best For</th>
+                        <th>Complexity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>GitFlow</strong></td>
+                        <td>Scheduled, versioned releases</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td><strong>GitHub Flow</strong></td>
+                        <td>Web apps, Continuous Deployment</td>
+                        <td>Low</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Trunk-Based</strong></td>
+                        <td>Senior teams, maximum speed</td>
+                        <td>Medium</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <p style="margin-top: 40px;"><a href="index.html">← Back to Homepage</a></p>
+    </main>
+
 </body>
 </html>
