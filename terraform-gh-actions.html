@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terraform with GitHub Actions - Wiki</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+            --border-color: #ddd;
+            --code-bg: #282c34;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        /* Sidebar Styling */
+        nav {
+            width: 250px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+
+        nav h2 {
+            font-size: 1.2rem;
+            border-bottom: 1px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 15px 0;
+        }
+
+        nav ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Main Content Area */
+        main {
+            flex-grow: 1;
+            padding: 40px;
+            overflow-y: auto;
+            background: white;
+        }
+
+        header {
+            border-bottom: 2px solid var(--bg-color);
+            margin-bottom: 30px;
+        }
+
+        h1 { color: var(--primary-color); }
+        h2 { color: var(--secondary-color); margin-top: 30px; border-bottom: 1px solid var(--border-color); padding-bottom: 5px;}
+
+        code {
+            background: #eee;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        pre {
+            background: var(--code-bg);
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .info-box {
+            background: #e7f3fe;
+            border-left: 6px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .tag {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <h2>📚 My Wiki</h2>
+        <ul>
+            <li><a href="index.html">🏠 Home</a></li>
+            <li><a href="branching-strategies.html">🌿 Branching Strategies</a></li>
+            <li><a href="terraform-gh-actions.html">🏗️ Terraform & GitHub Actions</a></li>
+            <li><a href="#">☸️ Kubernetes (Soon)</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <header>
+            <h1>Terraform + GitHub Actions CI/CD</h1>
+            <p>Automating Infrastructure as Code (IaC) with secure pipelines.</p>
+        </header>
+
+        <section>
+            <h2>Workflow Overview</h2>
+            <p>A professional Terraform pipeline automates testing and deployment based on GitHub events.</p>
+            <ul>
+                <li><strong>Pull Request:</strong> Runs <code>terraform plan</code> to preview changes.</li>
+                <li><strong>Push to Main:</strong> Runs <code>terraform apply</code> to deploy to the Cloud.</li>
+            </ul>
+
+            <div class="info-box">
+                <strong>Pro Tip:</strong> In 2026, use <strong>OIDC (OpenID Connect)</strong> instead of long-lived AWS Access Keys for better security.
+            </div>
+
+            <h2>The Workflow File</h2>
+            <p>Create this file at <code>.github/workflows/terraform.yml</code>:</p>
+            <pre>
+name: "Terraform Deployment"
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        if: github.event_name == 'pull_request'
+        run: terraform plan
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve
+            </pre>
+
+            <h2>Critical Checklist</h2>
+            <ol>
+                <li><strong>Remote Backend:</strong> Ensure your <code>terraform.tfstate</code> is stored in S3/GCS/Azure Blob. GitHub runners are ephemeral!</li>
+                <li><strong>Secrets:</strong> Store sensitive data in <strong>GitHub Secrets</strong> (Settings > Secrets and variables > Actions).</li>
+                <li><strong>State Locking:</strong> Use DynamoDB (for AWS) to prevent concurrent runs from corrupting your state.</li>
+            </ol>
+        </section>
+
+        <p style="margin-top: 40px;"><a href="index.html">← Back to Homepage</a></p>
+    </main>
+
+</body>
+</html>
