@@ -1,0 +1,96 @@
+<div align="center">
+  <h1>🚀 Intelligent AIOps Ecosystem v2</h1>
+  <p><i>Autonomous, Proactive Self-Healing Infrastructure for Modern SRE Teams</i></p>
+</div>
+
+<hr />
+
+<!-- Section 1: Architecture -->
+<h2>🏛️ System Architecture</h2>
+<p>The ecosystem operates as a distributed "Intelligent Brain" designed for multi-cloud Kubernetes environments.</p>
+
+<table style="width:100%; border: 1px solid #dfe2e5;">
+  <tr style="background-color: #f6f8fa;">
+    <th style="padding: 10px;">Layer</th>
+    <th style="padding: 10px;">Technology</th>
+    <th style="padding: 10px;">Function</th>
+  </tr>
+  <tr>
+    <td style="padding: 10px;"><b>Observability</b></td>
+    <td style="padding: 10px;">Prometheus</td>
+    <td style="padding: 10px;">Predicts failures via Linear Regression (e.g., Memory Leaks).</td>
+  </tr>
+  <tr>
+    <td style="padding: 10px;"><b>Orchestration</b></td>
+    <td style="padding: 10px;">n8n</td>
+    <td style="padding: 10px;">Coordinates workflows between AI, Vector DB, and Slack.</td>
+  </tr>
+  <tr>
+    <td style="padding: 10px;"><b>Intelligence</b></td>
+    <td style="padding: 10px;">LangChain + GPT-4o</td>
+    <td style="padding: 10px;">Correlates live logs with historical RAG memory.</td>
+  </tr>
+  <tr>
+    <td style="padding: 10px;"><b>Memory</b></td>
+    <td style="padding: 10px;">Pinecone</td>
+    <td style="padding: 10px;">Vector database for long-term "SRE Experience" storage.</td>
+  </tr>
+</table>
+
+<br />
+
+<!-- Section 2: Folder Structure -->
+<h2>📁 Project Structure</h2>
+<pre style="background-color: #f6f8fa; padding: 15px; border-radius: 5px;">
+INTELLIGENT_AIOPS_V2/
+├── .github/workflows/   # DevSecOps (Snyk SCA/IaC)
+├── agent_tools/         # Kubernetes Patching & Log tools
+├── documentation/       # Architecture & SRE Playbooks
+├── k8s_manifests/       # Prometheus Rules & Deployment YAMLs
+├── n8n_workflows/       # Workflow JSON (The Brain)
+├── scripts/             # Seeding (RAG) & Test Simulators
+├── tests/               # Validation Suite (Pytest)
+├── Dockerfile           # Agent Containerization
+└── docker-compose.yaml  # Local Stack Orchestration
+</pre>
+
+<br />
+
+<!-- Section 3: Code Explanation -->
+<h2>📄 Component Breakdown</h2>
+<ul>
+  <li><b><code>langchain_agent.py</code></b>: The core reasoning engine that generates Kubernetes JSON patches.</li>
+  <li><b><code>state_manager.py</code></b>: Uses Redis to ensure Slack approval tokens are secure and temporary.</li>
+  <li><b><code>slack_handler.py</code></b>: Handles interactive "Block Kit" messages for human-in-the-loop validation.</li>
+  <li><b><code>upsert_rag_data.py</code></b>: The "Teacher" script—converts text runbooks into searchable vectors.</li>
+  <li><b><code>k8s_tools.py</code></b>: Wrapper for the Kubernetes Python SDK to execute <code>Strategic Merge Patches</code>.</li>
+</ul>
+
+<br />
+
+<!-- Section 4: Execution -->
+<h2>🛠️ Step-by-Step Execution Guide</h2>
+
+<h3>Phase 1: Environment Boot</h3>
+<p>Ensure your <code>.env</code> file is populated, then launch the local stack:</p>
+<code style="background-color: #f1f1f1; padding: 5px; display: block;">docker-compose up --build -d</code>
+
+<h3>Phase 2: Seeding Intelligence</h3>
+<p>Feed your local agent the engineering expertise stored in your runbooks:</p>
+<code style="background-color: #f1f1f1; padding: 5px; display: block;">python scripts/upsert_rag_data.py</code>
+
+<h3>Phase 3: Import n8n Workflow</h3>
+<ol>
+  <li>Open <code>http://localhost:5678</code>.</li>
+  <li>Import the JSON from <code>n8n_workflows/</code>.</li>
+  <li>Activate the workflow to start listening for Prometheus webhooks.</li>
+</ol>
+
+<h3>Phase 4: The Fire Drill</h3>
+<p>Execute the simulator to trigger a predictive alert and receive a Slack notification:</p>
+<code style="background-color: #f1f1f1; padding: 5px; display: block;">python scripts/test_webhook.py</code>
+
+<hr />
+<div align="center">
+  <p><i>Generated for AIOps Ecosystem v2 - Secure & Autonomous Infrastructure</i></p>
+</div>
